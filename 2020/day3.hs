@@ -1,5 +1,5 @@
 stepByN :: Int -> [a] -> [a]
-stepByN n list = fmap fst $ filter (\(_, x) -> mod x n == 0) $ zip list [0..]
+stepByN n list = fst <$> filter (\(_, x) -> mod x n == 0) (zip list [0..])
 
 treeCount :: [String] -> Int -> Int -> Int
 treeCount input x_step y_step
@@ -8,7 +8,7 @@ treeCount input x_step y_step
 main :: IO()
 main = do
    input <- getContents
-   let rows = fmap cycle $ lines input
+   let rows = cycle <$> lines input
    putStr "Part1: "
    print $ treeCount rows 3 1
    let offsets = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
