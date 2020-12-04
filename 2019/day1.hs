@@ -7,7 +7,7 @@ makeWeightArray x
    | otherwise = weight:makeWeightArray weight
    where weight = doSingleWeight x
 
-main :: IO()
+main :: IO ()
 main = do
    input <- getContents
    let rows = read <$> lines input :: [Int]

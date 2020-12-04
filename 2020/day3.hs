@@ -5,7 +5,7 @@ treeCount :: [String] -> Int -> Int -> Int
 treeCount input x_step y_step
    = length $ filter (=='#') $ uncurry (!!) <$> zip (stepByN y_step input) (0:[x_step, x_step*2..])
 
-main :: IO()
+main :: IO ()
 main = do
    input <- getContents
    let rows = cycle <$> lines input

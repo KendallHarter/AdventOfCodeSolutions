@@ -1,5 +1,3 @@
-import qualified System.Environment ( getArgs )
-
 getPasswordStats :: String -> (Int, Int, Char)
 getPasswordStats input = (min, max, char)
    where i num = read num :: Int

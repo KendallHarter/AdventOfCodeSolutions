@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $(dirname "$0")
+include_dir=$(pwd)
 
 function run_year {
    year=$1
@@ -11,13 +12,13 @@ function run_year {
          echo
          echo "${year}/$i"
          echo
-         runhaskell "$i" < "input/${i%.*}.txt"
+         runhaskell -i"${include_dir}" "$i" < "input/${i%.*}.txt"
       done
    else
       echo
       echo "${year}/day${day}.hs"
       echo
-      runhaskell day${day}.hs < "input/day${day}.txt"
+      runhaskell -i"${include_dir}" day${day}.hs < "input/day${day}.txt"
    fi
    cd ..
 }
