@@ -27,9 +27,8 @@ makePassport input = do
    hairColor <- lookup "hcl" pairs
    eyeColor <- lookup "ecl" pairs
    passwordId <- lookup "pid" pairs
-   return $ Passport (i birthYear) (i issueYear) (i expYear) height hairColor eyeColor passwordId $ lookup "cid" pairs >>= \x -> Just $ i x
+   return $ Passport (read birthYear) (read issueYear) (read expYear) height hairColor eyeColor passwordId $ lookup "cid" pairs >>= \x -> Just $ read x
    where pairs = fmap makePair input
-         i x = read x :: Int
 
 validHeightInner :: String -> Bool
 validHeightInner ('n':'i':rest) = between (read $ reverse rest :: Int) 59 76
