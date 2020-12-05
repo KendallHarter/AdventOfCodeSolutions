@@ -1,6 +1,7 @@
 module Common where
 
 import Data.List ( foldl' )
+import Data.Bifunctor ( bimap )
 
 doNTimes :: (a -> a) -> a -> Int -> a
 doNTimes func init times
@@ -29,3 +30,6 @@ extractMaybe (Just x) = x
 foldlTuple :: (b -> a -> b) -> (b, b) -> [(a, a)] -> (b, b)
 foldlTuple func init fold_over = (doFold fst fst, doFold snd snd)
    where doFold accessor1 accessor2 = foldl' func (accessor1 init) $ accessor2 <$> fold_over
+
+mapTuple :: (a -> b) -> (a, a) -> (b, b)
+mapTuple f = bimap f f
