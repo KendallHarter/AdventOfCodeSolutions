@@ -2,7 +2,6 @@ import Common ( splitBy, foldlTuple, extractMaybe )
 import Data.List ( elemIndex, foldl' )
 import Data.Array ( array, (!), (//) )
 import Data.Bifunctor ( bimap )
-import Debug.Trace ( trace )
 
 applyMove :: String -> (Int, Int) -> [(Int, Int)]
 applyMove ('R':rest) (px, py) = [(px + x, py) | x <- [1..read rest]]
