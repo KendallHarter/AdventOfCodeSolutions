@@ -33,3 +33,6 @@ foldlTuple func init fold_over = (doFold fst fst, doFold snd snd)
 
 mapTuple :: (a -> b) -> (a, a) -> (b, b)
 mapTuple f = bimap f f
+
+mapSelf :: (a -> a -> b) -> [a] -> [b]
+mapSelf f x = uncurry f <$> zip x (tail x)

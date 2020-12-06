@@ -1,7 +1,4 @@
-import Common ( splitBy )
-
-mapSelf :: (a -> a -> b) -> [a] -> [b]
-mapSelf f x = uncurry f <$> zip x (tail x)
+import Common ( splitBy, mapSelf )
 
 main :: IO ()
 main = do
