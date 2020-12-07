@@ -1,6 +1,6 @@
 module Common where
 
-import Data.List ( foldl' )
+import Data.List ( foldl', sort )
 import Data.Bifunctor ( bimap )
 
 doNTimes :: (a -> a) -> a -> Int -> a
@@ -36,3 +36,8 @@ mapTuple f = bimap f f
 
 mapSelf :: (a -> a -> b) -> [a] -> [b]
 mapSelf f x = uncurry f <$> zip x (tail x)
+
+removeDuplicates :: (Ord a, Show a) => [a] -> [a]
+removeDuplicates input = start:(fst <$> filter (not . snd) (zip rest $ mapSelf (==) sorted))
+   where sorted       = sort input
+         (start:rest) = sorted
