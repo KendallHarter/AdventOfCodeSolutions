@@ -3,8 +3,8 @@ doSingleWeight x = div x 3 - 2
 
 makeWeightArray :: Int -> [Int]
 makeWeightArray x
-   | weight <= 0    = [0]
-   | otherwise = weight:makeWeightArray weight
+   | weight <= 0 = [0]
+   | otherwise   = weight:makeWeightArray weight
    where weight = doSingleWeight x
 
 main :: IO ()
