@@ -10,11 +10,11 @@ function run_year {
    day=$2
    cd ${year}
    if [ "$2" == "" ]; then
-      for i in *.hs; do
+      for i in day*.hs; do
          echo
          echo "${year}/$i"
          echo
-         ghc -O3 -i"${include_dir}" "$i" -o "${i%.*}" && "${i%.*}" < "input/${i%.*}.txt"
+         ghc -s -O3 -i"${include_dir}" "$i" -o "${i%.*}" && ./"${i%.*}" < "input/${i%.*}.txt"
       done
    else
       echo
