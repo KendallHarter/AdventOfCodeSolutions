@@ -14,7 +14,7 @@ function run_year {
          echo
          echo "${year}/$i"
          echo
-         ghc -s -O3 -i"${include_dir}" "$i" -o "${i%.*}" && ./"${i%.*}" < "input/${i%.*}.txt"
+         ghc -O3 -i"${include_dir}" "$i" -o "${i%.*}" && ./"${i%.*}" < "input/${i%.*}.txt"
       done
    else
       echo
