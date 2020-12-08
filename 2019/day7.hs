@@ -1,8 +1,8 @@
 import Intcode ( runProgram, readProgram, output, runUntilOutput, initProg, Program, input )
 import Data.List ( foldl', permutations )
-import Data.Array ( Array )
+import Data.Array.Unboxed ( UArray )
 
-calcOutput :: Array Int Int -> [Int] -> Int
+calcOutput :: UArray Int Int -> [Int] -> Int
 calcOutput prog inputs = head $ foldl' evalPartial [0] partialProgs
    where partialProgs = (\x -> output . runProgram prog . (x:)) <$> inputs
          evalPartial  = \prevOutput nextProg -> nextProg prevOutput
