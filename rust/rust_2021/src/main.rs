@@ -248,12 +248,67 @@ fn day4() {
     );
 }
 
+fn day5() {
+    use std::cmp::max;
+    use std::cmp::min;
+
+    type Vent = ((i32, i32), (i32, i32));
+    fn make_vent(line: &str) -> Option<Vent> {
+        let mut vals_raw = line.split("->");
+        fn make_pair(pair_str: &str) -> Option<(i32, i32)> {
+            let mut pair = pair_str.split(',');
+            return Some((
+                pair.next()?.trim().parse().unwrap(),
+                pair.next()?.trim().parse().unwrap(),
+            ));
+        }
+        return Some((make_pair(vals_raw.next()?)?, make_pair(vals_raw.next()?)?));
+    }
+
+    let vents: Vec<Vent> = std::io::stdin()
+        .lines()
+        .map(|x| make_vent(&x.unwrap()).unwrap())
+        .collect();
+
+    let board_size = 1 + vents
+        .iter()
+        .map(|((a, b), (c, d))| max(a, max(b, max(c, d))))
+        .max()
+        .unwrap();
+
+    let vert_horz = vents
+        .iter()
+        .filter(|((x1, y1), (x2, y2))| x1 == x2 || y1 == y2);
+
+    let mut board = vec![0; (board_size * board_size) as usize];
+
+    for ((x1, y1), (x2, y2)) in vert_horz {
+        if x1 == x2 {
+            let miny = min(*y1, *y2);
+            let maxy = max(*y1, *y2);
+            for y in miny..=maxy {
+                board[(*x1 + y * board_size) as usize] += 1;
+            }
+        } else {
+            let minx = min(*x1, *x2);
+            let maxx = max(*x1, *x2);
+            for x in minx..=maxx {
+                board[(x + *y1 * board_size) as usize] += 1;
+            }
+        }
+    }
+
+    let answer1 = board.iter().filter(|x| **x > 1).count();
+
+    println!("Part 1: {}", answer1);
+}
+
 fn main() {
-    let funcs = [day1, day2, day3, day4];
+    let funcs = [day1, day2, day3, day4, day5];
     let mut args = std::env::args();
     let usage = format!("Usage: {} day_to_run", args.next().unwrap());
     let day = args.next().expect(&usage).parse::<i32>().expect(&usage);
-    if day < 0 || day > funcs.len() as i32 {
+    if day < 1 || day > funcs.len() as i32 {
         eprintln!("{}", usage);
         return;
     }
