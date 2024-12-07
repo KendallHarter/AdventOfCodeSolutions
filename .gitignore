@@ -6,3 +6,4 @@ day[1-9][0-9]
 .vscode
 target/
 Cargo.lock
+build/
