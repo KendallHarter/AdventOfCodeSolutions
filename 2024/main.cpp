@@ -37,11 +37,12 @@ std::pair<std::int64_t, std::int64_t> day5(const std::string& input);
 std::pair<std::int64_t, std::int64_t> day6(const std::string& input);
 std::pair<std::int64_t, std::int64_t> day7(const std::string& input);
 std::pair<std::int64_t, std::int64_t> day8(const std::string& input);
+std::pair<std::int64_t, std::int64_t> day9(const std::string& input);
 
 int main(int argc, const char* argv[])
 {
    using func = std::pair<std::int64_t, std::int64_t> (*)(const std::string&);
-   constexpr func days[] = {day1, day2, day3, day4, day5, day6, day7, day8};
+   constexpr func days[] = {day1, day2, day3, day4, day5, day6, day7, day8, day9};
    constexpr int num_days = std::ssize(days);
    if (argc != 2) {
       eprint("Usage: {} day\n", argv[0]);
