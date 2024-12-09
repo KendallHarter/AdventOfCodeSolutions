@@ -35,8 +35,17 @@ clone_repo(khparse git@github.com:KendallHarter/khparse.git main)
 
 add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/repos/khparse)
 
-add_executable(solution src.cpp)
+add_executable(solution
+   days/1.cpp
+   days/2.cpp
+   days/3.cpp
+   days/4.cpp
+   days/5.cpp
+   days/6.cpp
+   main.cpp
+)
 target_link_libraries(solution khparse::khparse)
+target_include_directories(solution PRIVATE include)
 
 add_custom_target(create_input_symlink
    COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_SOURCE_DIR}/input" "${CMAKE_CURRENT_BINARY_DIR}/input"
