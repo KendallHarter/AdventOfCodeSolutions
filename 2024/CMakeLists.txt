@@ -42,6 +42,7 @@ add_executable(solution
    days/4.cpp
    days/5.cpp
    days/6.cpp
+   days/7.cpp
    main.cpp
 )
 target_link_libraries(solution khparse::khparse)
