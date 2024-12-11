@@ -2,18 +2,6 @@
 
 #include <fstream>
 
-template<std::integral T>
-T to_int(std::string_view v) noexcept
-{
-   T value;
-   const auto [ptr, ec] = std::from_chars(v.begin(), v.end(), value);
-   if (ec != std::errc{}) {
-      eprint("Error parsing \"{}\"\n", v);
-      std::exit(1);
-   }
-   return value;
-}
-
 std::string read_file(const char* file_name)
 {
    std::ifstream fin(file_name);
@@ -39,11 +27,12 @@ std::pair<std::int64_t, std::int64_t> day7(const std::string& input);
 std::pair<std::int64_t, std::int64_t> day8(const std::string& input);
 std::pair<std::int64_t, std::int64_t> day9(const std::string& input);
 std::pair<std::int64_t, std::int64_t> day10(const std::string& input);
+std::pair<std::int64_t, std::int64_t> day11(const std::string& input);
 
 int main(int argc, const char* argv[])
 {
    using func = std::pair<std::int64_t, std::int64_t> (*)(const std::string&);
-   constexpr func days[] = {day1, day2, day3, day4, day5, day6, day7, day8, day9, day10};
+   constexpr func days[] = {day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11};
    constexpr int num_days = std::ssize(days);
    if (argc != 2) {
       eprint("Usage: {} day\n", argv[0]);
