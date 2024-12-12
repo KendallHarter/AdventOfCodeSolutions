@@ -131,7 +131,6 @@ std::pair<std::int64_t, std::int64_t> day12(const std::string& input)
             }
          }
       }
-      print("{}: {} x {}\n", crop, area, sides);
       part2 += area * sides;
    }
 
