@@ -35,6 +35,8 @@ clone_repo(khparse git@github.com:KendallHarter/khparse.git main)
 
 add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/repos/khparse)
 
+find_package(Boost REQUIRED)
+
 add_executable(solution
    days/1.cpp
    days/2.cpp
@@ -48,9 +50,10 @@ add_executable(solution
    days/10.cpp
    days/11.cpp
    days/12.cpp
+   days/13.cpp
    main.cpp
 )
-target_link_libraries(solution khparse::khparse)
+target_link_libraries(solution khparse::khparse Boost::boost)
 target_include_directories(solution PRIVATE include)
 
 add_custom_target(create_input_symlink
