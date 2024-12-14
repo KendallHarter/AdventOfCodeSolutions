@@ -4,8 +4,6 @@
 
 #include <cmath>
 
-#include <iostream>
-
 std::pair<std::int64_t, std::int64_t> day13(const std::string& input)
 {
    const auto parser = khparse::repeat{
