@@ -67,7 +67,6 @@ std::pair<std::int64_t, std::int64_t> day13(const std::string& input)
       }
    }
 
-   using bigint = boost::multiprecision::cpp_int;
    std::int64_t part2 = 0;
    for (const auto& crane : cranes) {
       const auto& [a_x, a_y, b_x, b_y, raw_prize_x, raw_prize_y] = crane;
