@@ -2,8 +2,6 @@
 
 #include "common.hpp"
 
-#include <boost/multiprecision/cpp_int.hpp>
-
 #include <cmath>
 
 #include <iostream>
@@ -70,7 +68,7 @@ std::pair<std::int64_t, std::int64_t> day13(const std::string& input)
    }
 
    using bigint = boost::multiprecision::cpp_int;
-   bigint part2 = 0;
+   std::int64_t part2 = 0;
    for (const auto& crane : cranes) {
       const auto& [a_x, a_y, b_x, b_y, raw_prize_x, raw_prize_y] = crane;
       const auto prize_x = raw_prize_x + 10000000000000;
@@ -81,23 +79,23 @@ std::pair<std::int64_t, std::int64_t> day13(const std::string& input)
       // (1 / (a * b - b * c)) * [[d, -b]; [-c, a]] * [e * f] = [x, y]
       // x = d * e / (a * d - b * c) - b * f / (a * d - b * c)
       // y = a * f / (a * d - b * c) - c * e / (a * d - b * c)
-      const bigint a = a_x;
-      const bigint b = b_x;
-      const bigint c = a_y;
-      const bigint d = b_y;
-      const bigint e = prize_x;
-      const bigint f = prize_y;
-      const bigint divisor = a * d - b * c;
+      const std::int64_t a = a_x;
+      const std::int64_t b = b_x;
+      const std::int64_t c = a_y;
+      const std::int64_t d = b_y;
+      const std::int64_t e = prize_x;
+      const std::int64_t f = prize_y;
+      const std::int64_t divisor = a * d - b * c;
 
-      const bigint a_presses = d * e / divisor - b * f / divisor;
-      const bigint b_presses = a * f / divisor - c * e / divisor;
+      const std::int64_t a_presses = d * e / divisor - b * f / divisor;
+      const std::int64_t b_presses = a * f / divisor - c * e / divisor;
 
       if (a_presses * a_x + b_presses * b_x == prize_x && a_presses * a_y + b_presses * b_y == prize_y) {
-         part2 += a_presses * 3 + b_presses;
+         // do this in two steps to prevent overflow
+         part2 += a_presses * 3;
+         part2 += b_presses;
       }
    }
 
-   std::cout << "(Too big for i64) Part 2: " << part2 << '\n';
-
-   return {part1, 0};
+   return {part1, part2};
 }
